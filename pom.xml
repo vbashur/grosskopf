@@ -5,7 +5,11 @@
 
 	<groupId>com.vbashur</groupId>
 	<artifactId>grosskopf</artifactId>
+	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
+	<modules>
+		<module>authservice</module>
+	</modules>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
