@@ -11,6 +11,11 @@ import java.security.Principal;
 @RestController
 public class UserController {
 
+    @RequestMapping("/")
+    public String sayHi() {
+        return "Hi!";
+    }
+
 
     @RequestMapping("/user")
     @ResponseBody
