@@ -1,4 +1,5 @@
 zuul:
+
   routes:
     resource:
       path: /resource/**
@@ -6,7 +7,17 @@ zuul:
     user:
       path: /index/**
       url: http://localhost:8091/auth/index
+      sensitiveHeaders:
 
 logging:
   level:
     org.springframework.security: DEBUG
+
+#debug: true
+#
+#spring:
+#  aop:
+#    proxy-target-class: true
+#
+#security:
+#  sessions: NEVER
