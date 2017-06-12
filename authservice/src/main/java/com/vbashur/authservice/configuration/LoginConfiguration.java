@@ -25,7 +25,7 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
-                .requestMatchers().antMatchers("/login", "/index", "/oauth/authorize", "/oauth/confirm_access")
+                .requestMatchers().antMatchers("/login", "/index", "/oauth/authorize", "/oauth/confirm_access", "/test")
                 .and()
                 .httpBasic()
                 .realmName(REALM)

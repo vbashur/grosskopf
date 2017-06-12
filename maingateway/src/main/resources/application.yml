@@ -1,0 +1,12 @@
+zuul:
+  routes:
+    resource:
+      path: /resource/**
+      url: http://localhost:8091/resource
+    user:
+      path: /index/**
+      url: http://localhost:8091/auth/index
+
+logging:
+  level:
+    org.springframework.security: DEBUG
