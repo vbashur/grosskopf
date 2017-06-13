@@ -1,5 +1,7 @@
 package com.vbashur.authservice.configuration;
 
+import com.vbashur.authservice.security.JWTAuthenticationFilter;
+import com.vbashur.authservice.security.JWTLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +35,15 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(getBasicAuthEntryPoint())
                 .and()
                 .authorizeRequests()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                // https://auth0.com/blog/securing-spring-boot-with-jwts/
+                // We filter the api/login requests
+                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
+                        UsernamePasswordAuthenticationFilter.class)
+                // And filter other requests to check the presence of JWT in header
+                .addFilterBefore(new JWTAuthenticationFilter(),
+                        UsernamePasswordAuthenticationFilter.class);;
         // @formatter:on
     }
 
