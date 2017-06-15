@@ -1,0 +1,24 @@
+package com.vbashur.accounting.controller;
+
+import com.vbashur.accounting.model.ImmutableMerchant;
+import com.vbashur.accounting.model.Merchant;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
+
+@RestController
+public class MerchantController {
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Merchant getMerchant(@PathVariable Integer id, Principal principal) {
+        return ImmutableMerchant.builder()
+                .id(id)
+                .name(principal.getName())
+                .address(principal.toString())
+                .build();
+
+    }
+}
