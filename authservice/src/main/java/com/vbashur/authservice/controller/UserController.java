@@ -11,7 +11,7 @@ import java.security.Principal;
 @RestController
 public class UserController {
 
-    @RequestMapping("/")
+    @RequestMapping("/test")
     public String sayHi() {
         return "Hi!";
     }

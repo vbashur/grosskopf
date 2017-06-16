@@ -2,7 +2,7 @@ zuul:
   routes:
     resource:
       path: /api/**
-      url: http://localhost:8092/
+      url: http://localhost:8092/account/
       sensitiveHeaders:
 #    user:
 #      path: /index/**

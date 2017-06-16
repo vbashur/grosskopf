@@ -21,4 +21,10 @@ public class MerchantController {
                 .build();
 
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String getTestMessage() {
+        return "Test message";
+
+    }
 }

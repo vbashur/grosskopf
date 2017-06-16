@@ -16,7 +16,7 @@ import java.security.Principal;
 @RestController
 public class TestController {
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public TestData test() {
 
