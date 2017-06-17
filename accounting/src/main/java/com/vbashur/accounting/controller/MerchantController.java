@@ -27,4 +27,10 @@ public class MerchantController {
         return "Test message";
 
     }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String getTestPostMessage() {
+        return "Test Post message";
+
+    }
 }

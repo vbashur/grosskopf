@@ -23,7 +23,7 @@ public class EntryPointApplication extends WebSecurityConfigurerAdapter {
         http
                 .logout().and()
                 .authorizeRequests()
-                .antMatchers("/login", "/index", "/oauth/authorize", "/oauth/confirm_access", "/auth/**").permitAll()
+                .antMatchers("/login", "/index", "/oauth/authorize", "/oauth/confirm_access", "/auth/**", "/account/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf()
