@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import javax.servlet.http.HttpServletResponse;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
@@ -28,26 +30,36 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // @formatter:off
+//        http
+//                .csrf().disable()
+//                .formLogin().loginPage("/login").permitAll()
+//                .and()
+//                .requestMatchers().antMatchers("/login", "/index", "/oauth/authorize", "/oauth/confirm_access", "/test")
+//                .and()
+//                .httpBasic()
+//                .realmName(Const.REALM)
+//                .authenticationEntryPoint(getBasicAuthEntryPoint())
+//                .and()
+//                .authorizeRequests()
+//                .anyRequest().authenticated();
+        // @formatter:on
+
         http
                 .csrf().disable()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .requestMatchers().antMatchers("/login", "/index", "/oauth/authorize", "/oauth/confirm_access", "/test")
-                .and()
-                .httpBasic()
-                .realmName(Const.REALM)
-                .authenticationEntryPoint(getBasicAuthEntryPoint())
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
                 .authorizeRequests()
-                .anyRequest().authenticated();
-        // @formatter:on
+                .antMatchers("/**").authenticated()
+                .and()
+                .httpBasic();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("user").password("user").roles("USER")
-                .and().withUser("admin").password("admin").roles("ADMIN");
+                .withUser("user").password("user").roles("USER").authorities("USER")
+                .and().withUser("admin").password("admin").roles("ADMIN").authorities("ADMIN");
     }
 
     @Bean

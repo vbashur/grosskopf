@@ -33,6 +33,7 @@ public class OAuthConfiguration extends
                 .autoApprove(true)
                 .accessTokenValiditySeconds(600)
                 .refreshTokenValiditySeconds(600)
+                .authorities("USER", "ADMIN")
                 .authorizedGrantTypes("implicit", "authorization_code", "refresh_token",
                         "password").scopes("openid");
     }
