@@ -1,13 +1,12 @@
 package com.vbashur.authservice.configuration;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.security.Principal;
 
 @Configuration
 @EnableWebMvc
@@ -17,6 +16,7 @@ public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 //    public void addCorsMappings(CorsRegistry registry) {
 //        registry.addMapping("/api/**");
 //    }
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

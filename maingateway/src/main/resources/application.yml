@@ -1,13 +1,16 @@
+server:
+  port: 8090
+
 zuul:
   routes:
     resource:
       path: /api/**
       url: http://localhost:8092/account/
       sensitiveHeaders:
-#    user:
-#      path: /index/**
-#      url: http://localhost:8091/auth/index
-#      sensitiveHeaders:
+    user:
+      path: /user/**
+      url: http://localhost:8091/auth/user
+      sensitiveHeaders:
     auth:
       path: /auth/**
       url: http://localhost:8091/auth/
@@ -22,11 +25,12 @@ security:
     password: none
   oauth2:
     client:
-      accessTokenUri: http://localhost:8080/auth/oauth/token
-      userAuthorizationUri: http://localhost:8080/auth/oauth/authorize
+      accessTokenUri: http://localhost:8090/auth/oauth/token
+      userAuthorizationUri: http://localhost:8090/auth/oauth/authorize
       clientId: maingateway
-      preEstablishedRedirectUri: http://localhost:8080/login
-      registeredRedirectUri: http://localhost:8080/login
+      clientSecret: mySecretKey
+      preEstablishedRedirectUri: http://localhost:8090/login
+      registeredRedirectUri: http://localhost:8090/login
       useCurrentUri: false
 
     resource:
@@ -37,9 +41,11 @@ security:
           -----END PUBLIC KEY-----
 #debug: true
 #
-#spring:
-#  aop:
-#    proxy-target-class: true
+spring:
+  aop:
+    proxy-target-class: true
+
+
 #
 #security:
 #  sessions: NEVER

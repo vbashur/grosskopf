@@ -27,5 +27,11 @@ public class TestController {
 
     }
 
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @ResponseBody
+    public Principal user(Principal user) {
+        return user;
+    }
+
 
 }

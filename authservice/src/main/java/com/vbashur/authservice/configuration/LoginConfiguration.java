@@ -21,11 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class LoginConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+//    @Override
+//    @Bean
+//    public AuthenticationManager authenticationManagerBean() throws Exception {
+//        return super.authenticationManagerBean();
+//    }
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,17 +49,30 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .csrf().disable()
-                .exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .formLogin().loginPage("/login").permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers("/**").authenticated()
+                .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
+//                .and()
+//                .httpBasic() // TODO candidate to go away
+//                .realmName(Const.REALM)
+//                .authenticationEntryPoint(getBasicAuthEntryPoint())
                 .and()
-                .httpBasic();
+                .authorizeRequests().anyRequest().authenticated();
+
+//        http
+//                .csrf().disable()
+//                .exceptionHandling()
+//                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/**").authenticated()
+//                .and()
+//                .httpBasic();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.parentAuthenticationManager(authenticationManager);
         auth.inMemoryAuthentication()
                 .withUser("user").password("user").roles("USER").authorities("USER")
                 .and().withUser("admin").password("admin").roles("ADMIN").authorities("ADMIN");
