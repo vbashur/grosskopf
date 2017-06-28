@@ -19,14 +19,14 @@ public class ResourceServiceConfiguration extends ResourceServerConfigurerAdapte
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/**").authenticated()
-                .antMatchers(HttpMethod.POST, "/account").hasAuthority("ADMIN");
+                .antMatchers(HttpMethod.POST, "/").hasAuthority("ADMIN");
     }
 
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 
-        resources.resourceId("account").tokenStore(tokenStore);
+        resources.resourceId("openid").tokenStore(tokenStore);
     }
 
     @Autowired

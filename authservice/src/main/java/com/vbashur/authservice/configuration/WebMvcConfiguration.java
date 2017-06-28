@@ -8,8 +8,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import java.security.Principal;
 
-@Configuration
-@EnableWebMvc
+//@Configuration
+//@EnableWebMvc
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 
     //    @Override

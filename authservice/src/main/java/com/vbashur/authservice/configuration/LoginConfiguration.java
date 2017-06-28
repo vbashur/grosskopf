@@ -2,6 +2,8 @@ package com.vbashur.authservice.configuration;
 
 import com.vbashur.authservice.security.JWTAuthenticationFilter;
 import com.vbashur.authservice.security.JWTLoginFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,18 +19,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled=true)
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class LoginConfiguration extends WebSecurityConfigurerAdapter {
 
-//    @Override
-//    @Bean
-//    public AuthenticationManager authenticationManagerBean() throws Exception {
-//        return super.authenticationManagerBean();
-//    }
+    Logger log = LoggerFactory.getLogger(LoginConfiguration.class);
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+//    @Autowired
+//    private AuthenticationManager authenticationManager;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -47,32 +51,32 @@ public class LoginConfiguration extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated();
         // @formatter:on
 
-        http
-                .csrf().disable()
-                .formLogin().loginPage("/login").permitAll()
-                .and()
-                .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
-//                .and()
-//                .httpBasic() // TODO candidate to go away
-//                .realmName(Const.REALM)
-//                .authenticationEntryPoint(getBasicAuthEntryPoint())
-                .and()
-                .authorizeRequests().anyRequest().authenticated();
-
 //        http
 //                .csrf().disable()
-//                .exceptionHandling()
-//                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+//                .formLogin().loginPage("/login").permitAll()
 //                .and()
-//                .authorizeRequests()
-//                .antMatchers("/**").authenticated()
+//                .requestMatchers().antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
 //                .and()
-//                .httpBasic();
+//                .httpBasic()
+//                .realmName(Const.REALM)
+//                .authenticationEntryPoint(getBasicAuthEntryPoint())
+//                .and()
+//                .authorizeRequests().anyRequest().authenticated();
+
+        http
+                .csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+                .and()
+                .authorizeRequests()
+                .antMatchers("/**").authenticated()
+                .and()
+                .httpBasic();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.parentAuthenticationManager(authenticationManager);
+//        auth.parentAuthenticationManager(authenticationManager);
         auth.inMemoryAuthentication()
                 .withUser("user").password("user").roles("USER").authorities("USER")
                 .and().withUser("admin").password("admin").roles("ADMIN").authorities("ADMIN");

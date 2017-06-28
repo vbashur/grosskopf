@@ -23,14 +23,14 @@ public class OAuthConfiguration extends
         AuthorizationServerConfigurerAdapter {
 
     @Autowired
-//    @Qualifier("authenticationManagerBean")
+    @Qualifier("authenticationManagerBean")
     private AuthenticationManager authenticationManager;
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("maingateway")
-                .secret("mySecretKey")
+//                .secret("mySecretKey")
                 .autoApprove(true)
                 .accessTokenValiditySeconds(600)
                 .refreshTokenValiditySeconds(600)
@@ -47,14 +47,12 @@ public class OAuthConfiguration extends
 
     }
 
-
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer)
-            throws Exception {
-        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
-                "isAuthenticated()");
-    }
+//    @Override
+//    public void configure(AuthorizationServerSecurityConfigurer oauthServer)
+//            throws Exception {
+//        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess(
+//                "isAuthenticated()");
+//    }
 
     @Bean
     public TokenStore tokenStore() {
@@ -69,4 +67,6 @@ public class OAuthConfiguration extends
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
         return converter;
     }
+
+
 }
