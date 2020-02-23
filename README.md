@@ -16,3 +16,19 @@ Guardian proj: https://hellokoding.com/hello-single-sign-on-sso-with-json-web-to
 https://dzone.com/articles/spring-boot-security-json-web-tokenjwt-hello-world
 https://blog.softtek.com/en/token-based-api-authentication-with-spring-and-jwt
 
+Authentication
+
+To get the token: POST http://localhost:8080/authenticate
+HEADER
+Content-Type: application/json
+BODY
+{ 
+    "username" : "javainuse",
+    "password" : "password",
+}
+
+
+To check authorization: GET http://localhost:8080/status
+set custom header: Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE1ODI1MTIwNTMsImlhdCI6MTU4MjQ5NDA1M30.31h2VvzXxHyXqIqbkuu7DbvBwraEPnWCKIhQJsVD0gQNP0XTq3uYDOZmBMiioT_0FYbP0IOD3D5A9OmXFt_bIA 
+ 
+

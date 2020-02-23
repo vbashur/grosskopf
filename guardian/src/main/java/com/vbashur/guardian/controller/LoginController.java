@@ -3,6 +3,8 @@ package com.vbashur.guardian.controller;
 import com.vbashur.guardian.config.CookieUtil;
 import com.vbashur.guardian.config.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,8 +46,9 @@ public class LoginController {
             model.addAttribute("error", "Invalid username or password!");
             return "login";
         }
+        UserDetails details = new User(username, password, null);
 
-        String token = jwtTokenUtil.generateToken(username);
+        String token = jwtTokenUtil.generateToken(details);
         CookieUtil.create(httpServletResponse, jwtTokenCookieName, token, false, -1, "localhost");
         return "redirect:" + redirect;
     }
