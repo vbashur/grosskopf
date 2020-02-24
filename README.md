@@ -15,6 +15,7 @@ With authentication header: maingateway:<empty password>
 Guardian proj: https://hellokoding.com/hello-single-sign-on-sso-with-json-web-token-jwt-spring-boot/
 https://dzone.com/articles/spring-boot-security-json-web-tokenjwt-hello-world
 https://blog.softtek.com/en/token-based-api-authentication-with-spring-and-jwt
+https://www.callicoder.com/spring-boot-spring-security-jwt-mysql-react-app-part-4/
 
 Authentication
 

@@ -3,6 +3,7 @@ package com.vbashur.guardian.controller;
 import com.vbashur.guardian.config.JwtTokenUtil;
 import com.vbashur.guardian.model.JwtRequest;
 import com.vbashur.guardian.model.JwtResponse;
+import com.vbashur.guardian.model.UserDTO;
 import com.vbashur.guardian.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,11 @@ public class JwtAuthenticationController {
                 .loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
         return ResponseEntity.ok(new JwtResponse(token));
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) throws Exception {
+        return ResponseEntity.ok(userDetailsService.save(userDTO));
     }
 
     private void authenticate(String username, String password) throws Exception {
