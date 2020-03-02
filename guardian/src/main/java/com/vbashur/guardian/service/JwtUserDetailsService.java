@@ -1,10 +1,10 @@
 package com.vbashur.guardian.service;
 
 import com.vbashur.guardian.UserRepository;
+import com.vbashur.guardian.model.ImmutableUserDTO;
 import com.vbashur.guardian.model.UserDTO;
 import com.vbashur.guardian.model.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,11 +16,13 @@ import java.util.ArrayList;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

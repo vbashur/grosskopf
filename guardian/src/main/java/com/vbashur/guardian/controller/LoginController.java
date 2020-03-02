@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+@Deprecated
 @RestController
 public class LoginController {
 

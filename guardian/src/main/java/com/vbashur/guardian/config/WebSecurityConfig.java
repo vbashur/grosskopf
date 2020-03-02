@@ -1,6 +1,8 @@
 package com.vbashur.guardian.config;
 
 
+import com.vbashur.guardian.model.ImmutableUserDTO;
+import com.vbashur.guardian.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,11 +23,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+//    @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Autowired
-    private UserDetailsService jwtUserDetailsService;
-    @Autowired
+    public WebSecurityConfig(JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtUserDetailsService jwtUserDetailsService, JwtRequestFilter jwtRequestFilter) {
+        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+        this.jwtUserDetailsService = jwtUserDetailsService;
+        this.jwtRequestFilter = jwtRequestFilter;
+    }
+
+//    @Autowired
+    private JwtUserDetailsService jwtUserDetailsService;
+//    @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
@@ -34,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // user for matching credentials
         // Use BCryptPasswordEncoder
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
+
     }
 
     @Bean
@@ -61,5 +72,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+        jwtUserDetailsService.save(ImmutableUserDTO.builder()
+                .username("user1")
+                .password("user1")
+                .build());
     }
 }
