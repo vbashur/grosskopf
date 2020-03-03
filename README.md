@@ -17,7 +17,13 @@ https://dzone.com/articles/spring-boot-security-json-web-tokenjwt-hello-world
 https://blog.softtek.com/en/token-based-api-authentication-with-spring-and-jwt
 https://www.callicoder.com/spring-boot-spring-security-jwt-mysql-react-app-part-4/
 
-Authentication
+## Authentication
+run guardian application
+
+run presentier application
+
+input `user1 user1` credentials into the form available at http://localhost:8012/
+
 
 To get the token: POST http://localhost:8080/authenticate
 HEADER

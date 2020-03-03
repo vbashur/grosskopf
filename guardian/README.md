@@ -1,4 +1,7 @@
 
+# Guardian
+Main application gateway that serves security, manages user permissions and acts as a gateway for the microservices that provide functionality 
+
 ## Running the Application
 
 Import the project to the IDE of your choosing as a Maven project.

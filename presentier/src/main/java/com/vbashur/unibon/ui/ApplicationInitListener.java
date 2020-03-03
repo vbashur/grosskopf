@@ -17,12 +17,9 @@ public class ApplicationInitListener implements VaadinServiceInitListener {
 
     @Override
     public void serviceInit(ServiceInitEvent initEvent) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.initEvent = " + initEvent);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.accessControl = " + accessControl);
 
         initEvent.getSource().addUIInitListener(uiInitEvent -> {
             uiInitEvent.getUI().addBeforeEnterListener(enterEvent -> {
-                System.out.println("access control = " + accessControl);
                 if (accessControl != null && !accessControl.isUserSignedIn() && !LoginScreen.class
                         .equals(enterEvent.getNavigationTarget()))
 //                    System.out.println("access control =>>>>>>>>>> " + accessControl.getTime());
