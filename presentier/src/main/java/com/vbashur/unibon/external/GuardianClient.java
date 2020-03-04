@@ -14,6 +14,9 @@ public interface GuardianClient {
     @RequestMapping(method = RequestMethod.POST, value = "/authenticate", consumes = MediaType.APPLICATION_JSON_VALUE)
     AuthenticationResponse authenticate(UserPassword userPassword);
 
+    @RequestMapping(method = RequestMethod.POST, value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
+    UserPassword register(UserPassword userPassword);
+
     @RequestMapping(method = RequestMethod.GET, value = "/status")
     String status(@RequestHeader("Authorization") String token);
 

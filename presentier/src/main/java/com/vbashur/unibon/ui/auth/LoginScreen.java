@@ -1,4 +1,4 @@
-package com.vbashur.unibon.ui.login;
+package com.vbashur.unibon.ui.auth;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
@@ -38,6 +38,7 @@ public class LoginScreen extends FlexLayout {
         loginForm.addLoginListener(this::login);
         loginForm.addForgotPasswordListener(
                 event -> Notification.show("Hint: same as username"));
+
 
         // layout to center login form when there is sufficient screen space
         FlexLayout centeringLayout = new FlexLayout();
