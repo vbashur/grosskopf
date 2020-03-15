@@ -1,4 +1,5 @@
 *.class
+**/build/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -18,6 +19,9 @@ hs_err_pid*
 
 # compiled resources
 **/target/
+
+# gradle files
+**/.gradle
 
 
 # The following files are generated/updated by vaadin-maven-plugin
