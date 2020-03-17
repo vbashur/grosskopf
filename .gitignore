@@ -23,6 +23,8 @@ hs_err_pid*
 # gradle files
 **/.gradle
 
+# database traces
+test/*
 
 # The following files are generated/updated by vaadin-maven-plugin
 **/node_modules/

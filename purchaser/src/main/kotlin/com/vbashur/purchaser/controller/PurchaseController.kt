@@ -9,7 +9,7 @@ import kotlin.random.Random
 @RestController
 class PurchaseController {
 
-    @GetMapping("/greeting")
+    @GetMapping("/")
     fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String) =
             PurchasePayload(Random(100).nextLong(), "Hello, $name")
 
