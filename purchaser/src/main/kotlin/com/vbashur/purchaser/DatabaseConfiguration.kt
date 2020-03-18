@@ -12,9 +12,9 @@ class DatabaseConfiguration {
     @Bean
     fun dataSource() : EmbeddedDatabase {
         return EmbeddedDatabaseBuilder()
-//                .addScripts("schema.sql"
-//                        , "data.sql"
-//                )
+                .addScripts("db/schema.sql"
+                        , "db/data.sql"
+                )
                 .setType(EmbeddedDatabaseType.H2)
                 .build();
     }
